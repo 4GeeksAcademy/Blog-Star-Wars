@@ -10,7 +10,7 @@ export const Characters = () => {
 
  return (
     <div className="m-5 overflow-x-auto" >
-        <h2 className="text-danger mb-4 d-flex justify-content-start mt-5" >
+        <h2 className="text-danger mb-4 d-flex justify-content-start" style={{marginTop: "120px"}}>
             Characters
         </h2>
         <div className="d-flex" >
@@ -19,6 +19,7 @@ export const Characters = () => {
                 id={item.uid}
                 key={item.uid}
                 name={item.name}
+                route={`/characters/${item.uid}`}
             />))}
             
         </div>

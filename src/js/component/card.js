@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useContext, useState} from "react";
+import { Link, Navigate, Route, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext"
 import PropTypes from "prop-types";
 
 
+
 export const Card = props => {
+
+    const { actions, store } = useContext(Context);
+
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+        if (!isFavorite) {
+            actions.addFavorites(props.name);
+        }
+    }
 
     return (
         <div className="me-3 my-3 rounded" >
@@ -12,9 +26,10 @@ export const Card = props => {
                 <div className="card-body">
                     <h5 className="card-title">{props.name}</h5>
                     <div className="d-flex justify-content-between">
-                        <a href="#" className="btn btn-primary">Learn more!</a>
+                        <Link  className="btn btn-outline-primary" to={props.route}>Learn more!
+                        </Link>
 
-                        <span className="btn btn-outline-warning">
+                        <span className="btn btn-outline-warning" onClick={toggleFavorite}>
                             <i className="fa-regular fa-heart"></i>
                         </span>
                     </div>
@@ -27,7 +42,8 @@ export const Card = props => {
 
 Card.propTypes = {
     name: PropTypes.string,
-    id: PropTypes.string
+    id: PropTypes.string,
+    route: PropTypes.string
 };
 
 
